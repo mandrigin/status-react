@@ -14,7 +14,7 @@
 
 (defmethod action-view :fullscreen
   [_]
-  (let [fullscreen? (subscribe [:chat-ui-props :fullscreen?])]
+  (let [fullscreen? (subscribe [:get-current-chat-ui-prop :fullscreen?])]
     (fn []
       [touchable-highlight
        {:on-press #(dispatch [:set-chat-ui-props {:fullscreen? (not @fullscreen?)}])}
@@ -26,7 +26,7 @@
 
 (defmethod action-view :web-view-back
   [_]
-  (let [result-box (subscribe [:chat-ui-props :result-box])
+  (let [result-box (subscribe [:get-current-chat-ui-prop :result-box])
         webview    (subscribe [:get :webview-bridge])]
     (fn []
       [touchable-highlight
@@ -40,7 +40,7 @@
 
 (defmethod action-view :web-view-forward
   [_]
-  (let [result-box (subscribe [:chat-ui-props :result-box])
+  (let [result-box (subscribe [:get-current-chat-ui-prop :result-box])
         webview    (subscribe [:get :webview-bridge])]
     (fn []
       [touchable-highlight
@@ -61,7 +61,7 @@
     [icon (str "action_" image) style/action-view-icon]]])
 
 (defn input-actions-view []
-  (let [result-box (subscribe [:chat-ui-props :result-box])]
+  (let [result-box (subscribe [:get-current-chat-ui-prop :result-box])]
     (fn []
       (let [{:keys [actions]} @result-box]
         [view style/actions-container
